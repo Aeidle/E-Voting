@@ -16,3 +16,5 @@ A secure, transparent e-voting platform built on Ethereum blockchain technology.
 - Next.js Frontend
 - Web3.js
 - Docker
+
+> NOTE: Please return to the documnetation in /docs folder
