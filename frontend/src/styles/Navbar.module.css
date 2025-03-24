@@ -1,0 +1,144 @@
+.voterBadge {
+  background-color: #b3e5fc;
+  color: #0277bd;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.loginActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.switchLoginButton {
+  background: none;
+  border: none;
+  color: #0070f3;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.logo span {
+  cursor: pointer;
+  color: #0070f3;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLinks span {
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.navLinks span:hover {
+  color: #0070f3;
+}
+
+.navLinks span.active {
+  color: #0070f3;
+  position: relative;
+}
+
+.navLinks span.active:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5rem;
+  height: 3px;
+  background-color: #0070f3;
+  border-radius: 1.5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.connectButton {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.connectButton:hover {
+  background-color: #0051a8;
+}
+
+.connectButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.address {
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  background-color: #f5f7fa;
+  border-radius: 5px;
+  color: #333;
+}
+
+.adminBadge {
+  background-color: #fde68a;
+  color: #92400e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .navLinks {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .actions {
+    width: 100%;
+    justify-content: center;
+  }
+}

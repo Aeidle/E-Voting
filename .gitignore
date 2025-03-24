@@ -1,50 +1,22 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Build artifacts
+build/
+.next/
 
-# testing
-/coverage
+# Environment variables
+.env
+.env.local
 
-# next.js
-/.next/
-/out/
+# Docker volumes
+docker-volumes/
 
-# production
-/build
+# IDE files
+.idea/
+.vscode/
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-postcss.config.js
-tailwind.config.js
-yarn.lock
-.idea/.gitignore
-.idea/blockchain-e-voting-system.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/inspectionProfiles/profiles_settings.xml

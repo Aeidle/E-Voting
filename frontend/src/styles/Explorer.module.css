@@ -1,0 +1,299 @@
+.container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .backButton {
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .backButton:hover {
+    background-color: #0051a8;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .accountsSection, .blocksSection {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .accountsSection h2, .blocksSection h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.75rem;
+  }
+  
+  .accountList {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  .accountCard {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f9f9f9;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+  }
+  
+  .accountIndex {
+    width: 25px;
+    height: 25px;
+    background-color: #0070f3;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .accountDetails {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .accountAddress {
+    font-family: monospace;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .accountBalance {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+  
+  .blockList {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  .blockCard {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .blockCard:hover {
+    background-color: #f0f7ff;
+    transform: translateY(-2px);
+  }
+  
+  .selectedBlock {
+    background-color: #e6f2ff;
+    border-left: 3px solid #0070f3;
+  }
+  
+  .blockNumber {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .blockInfo {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .blockHash, .blockTimestamp, .transactionCount {
+    margin-right: 1rem;
+  }
+  
+  .blockDetails {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .blockDetails h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.75rem;
+  }
+  
+  .blockDetails h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  
+  .blockPropertiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1rem;
+  }
+  
+  .blockProperty, .transactionProperty {
+    margin-bottom: 0.75rem;
+  }
+  
+  .propertyLabel {
+    font-weight: 500;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .propertyValue {
+    font-family: monospace;
+    word-break: break-all;
+  }
+  
+  .transactionList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .transactionCard {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .transactionHeader {
+    background-color: #f0f7ff;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e6f2ff;
+  }
+  
+  .transactionIndex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #0070f3;
+    color: white;
+    font-size: 0.8rem;
+    margin-right: 0.75rem;
+  }
+  
+  .transactionHash {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #0070f3;
+  }
+  
+  .transactionDetails {
+    padding: 1rem;
+  }
+  
+  .eventLogs {
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-top: 1px solid #eee;
+  }
+  
+  .eventLogs h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .eventLog {
+    background-color: white;
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #eee;
+  }
+  
+  .logAddress {
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .logTopics {
+    margin-bottom: 0.5rem;
+  }
+  
+  .logTopic {
+    font-family: monospace;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    word-break: break-all;
+  }
+  
+  .logData {
+    font-size: 0.85rem;
+  }
+  
+  .noTransactions {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 6px;
+    color: #666;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+  }
+  
+  .errorMessage {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ef9a9a;
+  }
+  
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .blockPropertiesGrid {
+      grid-template-columns: 1fr;
+    }
+  }

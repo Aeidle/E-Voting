@@ -1,0 +1,62 @@
+.chartContainer {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .noData {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #ddd;
+  }
+  
+  .customTooltip {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 280px;
+  }
+  
+  .tooltipTime {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .tooltipItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tooltipItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tooltipColor {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+  }
+  
+  .tooltipLabel {
+    font-weight: 500;
+    margin-right: 0.25rem;
+  }
+  
+  .tooltipValue {
+    font-weight: 600;
+  }

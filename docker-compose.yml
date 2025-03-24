@@ -1,0 +1,57 @@
+services:
+  ganache:
+    build:
+      context: ./blockchain
+      dockerfile: Dockerfile
+    ports:
+      - "8545:8545"
+    networks:
+      - blockchain-network
+    container_name: evoting-ganache
+    # Use a named volume for blockchain data if you want persistence
+    # Or use tmpfs for a clean state on every restart
+    volumes:
+      - type: tmpfs
+        target: /ganache_data
+
+  truffle:
+    build:
+      context: .
+      dockerfile: ./contracts/Dockerfile
+    volumes:
+      - ./contracts:/app/contracts
+      - ./migrations:/app/migrations
+      - ./build:/app/build
+      - ./truffle-config.js:/app/truffle-config.js
+      - ./test:/app/test
+    depends_on:
+      - ganache
+    networks:
+      - blockchain-network
+    container_name: evoting-truffle
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/src:/app/src
+      - ./build:/app/build
+      # Ensure node_modules in the container aren't overwritten
+      - /app/node_modules
+    depends_on:
+      - truffle
+    networks:
+      - blockchain-network
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_NETWORK_ID=1337
+      - NEXT_PUBLIC_CONTRACT_ADDRESS=auto
+    container_name: evoting-frontend
+
+networks:
+  blockchain-network:
+    driver: bridge

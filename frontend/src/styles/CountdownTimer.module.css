@@ -1,0 +1,49 @@
+.countdownTimer {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .countdownTimer.large {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background-color: #e9f5ff;
+    border: 1px solid #cce5ff;
+  }
+  
+  .label {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+  }
+  
+  .time {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0070f3;
+    font-family: monospace;
+  }
+  
+  .large .label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .large .time {
+    font-size: 2rem;
+  }
+  
+  .expired {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #dc3545;
+    font-family: monospace;
+  }
+  
+  .large .expired {
+    font-size: 2rem;
+  }
