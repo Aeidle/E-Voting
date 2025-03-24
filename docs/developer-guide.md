@@ -86,17 +86,21 @@ To completely reset the blockchain state (useful for testing or when state becom
 ### Accessing the Application
 
 - **Frontend**: [http://localhost:3000](http://localhost:3000)
-- **Blockchain Explorer**: [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
 ### MetaMask Configuration
 
 1. Install the MetaMask browser extension
-2. Create or import an account
+2. Import the admin wallet using this private key:
+   ```
+   0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3
+   ```
 3. Add a new network with these settings:
    - Network Name: Local Blockchain
    - RPC URL: http://localhost:8545
    - Chain ID: 1337
    - Currency Symbol: ETH
+
+**Note:** Keep the admin wallet's private key secure and do not share it publicly. This wallet has administrative privileges in the e-voting system.
 
 ## Code Structure
 
