@@ -752,3 +752,146 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable:hover {
+  background-color: rgba(0, 112, 243, 0.08);
+}
+
+/* Wallet Info Modal Styles */
+.walletInfoModalContent {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 650px;
+  overflow: hidden;
+}
+
+.walletInfoModalBody {
+  padding: 1.5rem;
+}
+
+.walletInfoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .walletInfoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.walletInfoDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.walletInfoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.walletInfoLabel {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.walletInfoValue {
+  font-family: monospace;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.qrCodeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.qrCode {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+.qrHelp {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.walletInfoActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+/* Print styles */
+@media print {
+  /* Instead of using body *, we'll use relative selectors */
+  .printing {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    background: white;
+  }
+  
+  /* Hide buttons in print view */
+  .printing .walletInfoActions,
+  .printing .closeButton {
+    display: none;
+  }
+  
+  /* Page layout for print */
+  .printing .modalHeader {
+    text-align: center;
+    border-bottom: 2px solid #000;
+    margin-bottom: 1rem;
+  }
+  
+  .printing .modalHeader h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .printing .walletInfoModalBody {
+    padding: 0 2rem 2rem;
+  }
+  
+  .printing .qrCodeContainer {
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  
+  /* Add print footer */
+  .printing .walletInfoModalBody::after {
+    content: "E-Voting System - Wallet Credential";
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+  }
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { QRCodeSVG } from 'qrcode.react';
 import styles from '../../styles/Admin.module.css';
 import ConnectWallet from '../../components/ConnectWallet';
 import initCredentialManager, {
@@ -36,6 +37,15 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
   // Selected credentials for batch operations
   const [selectedCredentials, setSelectedCredentials] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  
+  // Wallet info modal state
+  const [selectedWalletInfo, setSelectedWalletInfo] = useState({
+    isOpen: false,
+    address: '',
+    balance: '',
+    status: false,
+    createdAt: null
+  });
   
   // Form state for creating a new credential
   const [newSingleCredential, setNewSingleCredential] = useState({
@@ -468,6 +478,185 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
     return new Date(timestamp * 1000).toLocaleString();
   };
   
+  // Handle opening wallet info modal
+  const handleOpenWalletInfo = (credential) => {
+    setSelectedWalletInfo({
+      isOpen: true,
+      address: credential.walletAddress,
+      balance: credential.formattedBalance,
+      status: credential.isActive,
+      createdAt: credential.createdAt
+    });
+  };
+  
+  // Handle closing wallet info modal
+  const handleCloseWalletInfo = () => {
+    setSelectedWalletInfo({
+      isOpen: false,
+      address: '',
+      balance: '',
+      status: false,
+      createdAt: null
+    });
+  };
+  
+  // Handle printing wallet info as PDF
+  const handlePrintWalletInfo = () => {
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    
+    if (!printWindow) {
+      alert("Please allow popups for this website to print wallet information.");
+      return;
+    }
+    
+    // Get current date for the printout
+    const printDate = new Date().toLocaleDateString();
+    
+    // Create print-friendly content
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Wallet Credential - ${selectedWalletInfo.address.substring(0, 10)}...</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+          }
+          .print-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+          }
+          .header {
+            text-align: center;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+          }
+          .qr-section {
+            text-align: center;
+            margin: 20px 0;
+          }
+          .wallet-details {
+            margin: 20px 0;
+          }
+          .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+          }
+          .detail-label {
+            font-weight: bold;
+            width: 100px;
+            color: #666;
+          }
+          .detail-value {
+            flex: 1;
+            font-family: monospace;
+            word-break: break-all;
+          }
+          .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+          }
+          .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+          }
+          .active {
+            background-color: #d1e7dd;
+            color: #0f5132;
+          }
+          .inactive {
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="print-container">
+          <div class="header">
+            <h2>E-Voting Wallet Credential</h2>
+            <p>Generated on ${printDate}</p>
+          </div>
+          
+          <div class="qr-section">
+            <h3>Scan to import in MetaMask</h3>
+            <img 
+              src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:${selectedWalletInfo.address}&size=200x200" 
+              alt="Wallet QR Code"
+              width="200"
+              height="200"
+            />
+            <p>Scan this QR code with MetaMask mobile app to add this wallet</p>
+          </div>
+          
+          <div class="wallet-details">
+            <h3>Wallet Information</h3>
+            
+            <div class="detail-row">
+              <div class="detail-label">Address:</div>
+              <div class="detail-value">${selectedWalletInfo.address}</div>
+            </div>
+            
+            <div class="detail-row">
+              <div class="detail-label">Balance:</div>
+              <div class="detail-value">${selectedWalletInfo.balance}</div>
+            </div>
+            
+            <div class="detail-row">
+              <div class="detail-label">Status:</div>
+              <div class="detail-value">
+                <span class="badge ${selectedWalletInfo.status ? 'active' : 'inactive'}">
+                  ${selectedWalletInfo.status ? 'Active' : 'Inactive'}
+                </span>
+              </div>
+            </div>
+            
+            <div class="detail-row">
+              <div class="detail-label">Created:</div>
+              <div class="detail-value">${formatDate(selectedWalletInfo.createdAt)}</div>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <p>E-Voting System - Secure Blockchain Voting Platform</p>
+            <p>Keep this credential information secure and confidential</p>
+          </div>
+        </div>
+        <script>
+          // Auto-print when loaded
+          window.onload = function() {
+            setTimeout(function() {
+              window.print();
+              // Close window after printing (or if print is cancelled)
+              setTimeout(function() {
+                window.close();
+              }, 500);
+            }, 500);
+          };
+        </script>
+      </body>
+      </html>
+    `;
+    
+    // Write the content to the new window
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+  };
+  
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -681,7 +870,13 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
                           className={styles.checkbox}
                         />
                       </td>
-                      <td className={styles.walletAddress}>{credential.walletAddress}</td>
+                      <td 
+                        className={`${styles.walletAddress} ${styles.clickable}`} 
+                        onClick={() => handleOpenWalletInfo(credential)}
+                        title="Click for wallet details"
+                      >
+                        {credential.walletAddress}
+                      </td>
                       <td>
                         <span className={`${styles.badge} ${credential.isActive ? styles.statusActive : styles.statusInactive}`}>
                           {credential.isActive ? 'Active' : 'Inactive'}
@@ -803,6 +998,84 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Wallet Info Modal with QR Code */}
+      {selectedWalletInfo.isOpen && (
+        <div className={styles.modal}>
+          <div className={styles.walletInfoModalContent}>
+            <div className={styles.modalHeader}>
+              <h3>Wallet Information</h3>
+              <button
+                className={styles.closeButton}
+                onClick={handleCloseWalletInfo}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.walletInfoModalBody}>
+              <div className={styles.walletInfoGrid}>
+                <div className={styles.walletInfoDetails}>
+                  <div className={styles.walletInfoItem}>
+                    <span className={styles.walletInfoLabel}>Address:</span>
+                    <span className={styles.walletInfoValue}>{selectedWalletInfo.address}</span>
+                  </div>
+                  <div className={styles.walletInfoItem}>
+                    <span className={styles.walletInfoLabel}>Balance:</span>
+                    <span className={styles.walletInfoValue}>{selectedWalletInfo.balance}</span>
+                  </div>
+                  <div className={styles.walletInfoItem}>
+                    <span className={styles.walletInfoLabel}>Status:</span>
+                    <span className={`${styles.badge} ${selectedWalletInfo.status ? styles.statusActive : styles.statusInactive}`}>
+                      {selectedWalletInfo.status ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
+                  <div className={styles.walletInfoItem}>
+                    <span className={styles.walletInfoLabel}>Created:</span>
+                    <span className={styles.walletInfoValue}>{formatDate(selectedWalletInfo.createdAt)}</span>
+                  </div>
+                </div>
+                <div className={styles.qrCodeContainer}>
+                  <h4>Scan to import in MetaMask</h4>
+                  <div className={styles.qrCode}>
+                    <QRCodeSVG 
+                      value={`ethereum:${selectedWalletInfo.address}`}
+                      size={200}
+                      bgColor={"#ffffff"}
+                      fgColor={"#000000"}
+                      level={"L"}
+                      includeMargin={false}
+                    />
+                  </div>
+                  <p className={styles.qrHelp}>Scan this QR code with MetaMask mobile app to add this wallet</p>
+                </div>
+              </div>
+              <div className={styles.walletInfoActions}>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    handleCloseWalletInfo();
+                    handleOpenFundForm(selectedWalletInfo.address);
+                  }}
+                >
+                  Add Funds
+                </button>
+                <button
+                  className={styles.buttonSecondary}
+                  onClick={handleCloseWalletInfo}
+                >
+                  Close
+                </button>
+                <button
+                  className={styles.buttonSecondary}
+                  onClick={handlePrintWalletInfo}
+                >
+                  Print
+                </button>
+              </div>
             </div>
           </div>
         </div>
