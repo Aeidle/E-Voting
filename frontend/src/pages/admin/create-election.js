@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/Admin.module.css';
 import ConnectWallet from '../../components/ConnectWallet';
+import GasEstimation from '../../components/GasEstimation';
+import initWeb3, { formatElectionStatus } from '../../utils/web3';
 
 export default function CreateElection({ contract, account, isAdmin, loading, onConnect }) {
   const router = useRouter();
@@ -15,11 +17,51 @@ export default function CreateElection({ contract, account, isAdmin, loading, on
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [estimatedGas, setEstimatedGas] = useState(null);
+  const [web3, setWeb3] = useState(null);
+  
+  useEffect(() => {
+    const setupWeb3 = async () => {
+      const { web3: web3Instance } = await initWeb3();
+      setWeb3(web3Instance);
+    };
+    
+    setupWeb3();
+  }, []);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
+  
+  // Update gas estimation whenever form values change
+  useEffect(() => {
+    const updateGasEstimate = async () => {
+      if (!contract || !account || !formState.name || !formState.description) {
+        setEstimatedGas(null);
+        return;
+      }
+      
+      try {
+        const { name, description, startTime, endTime } = formState;
+        
+        // Convert datetime inputs to timestamps (if provided)
+        const startTimeStamp = startTime ? Math.floor(new Date(startTime).getTime() / 1000) : 0;
+        const endTimeStamp = endTime ? Math.floor(new Date(endTime).getTime() / 1000) : 0;
+        
+        const gas = await contract.methods
+          .createElection(name, description, startTimeStamp, endTimeStamp)
+          .estimateGas({ from: account });
+          
+        setEstimatedGas(gas);
+      } catch (error) {
+        console.error("Error estimating gas:", error);
+        setEstimatedGas(null);
+      }
+    };
+    
+    updateGasEstimate();
+  }, [contract, account, formState]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,12 +88,26 @@ export default function CreateElection({ contract, account, isAdmin, loading, on
         throw new Error('End time must be after start time');
       }
       
-      // Call contract to create election with higher gas limit
+      // Get gas estimate one more time
+      let gasToUse;
+      try {
+        const estimatedGas = await contract.methods
+          .createElection(name, description, startTimeStamp, endTimeStamp)
+          .estimateGas({ from: account });
+          
+        // Add 10% buffer
+        gasToUse = Math.floor(estimatedGas * 1.1);
+      } catch (error) {
+        console.error("Error estimating gas, using default:", error);
+        gasToUse = 500000; // Fallback to default if estimation fails
+      }
+      
+      // Call contract to create election with dynamically estimated gas
       await contract.methods
         .createElection(name, description, startTimeStamp, endTimeStamp)
         .send({ 
           from: account,
-          gas: 500000 // Set a higher gas limit
+          gas: gasToUse
         });
       
       // Redirect to manage elections page
@@ -177,6 +233,10 @@ export default function CreateElection({ contract, account, isAdmin, loading, on
           />
           <small>Leave blank for manual end</small>
         </div>
+        
+        {estimatedGas && web3 && (
+          <GasEstimation estimatedGas={estimatedGas} web3={web3} />
+        )}
         
         <div className={styles.formActions}>
           <button

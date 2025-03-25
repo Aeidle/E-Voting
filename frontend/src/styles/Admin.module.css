@@ -40,12 +40,35 @@
 }
 
 .batchButton {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
   border: none;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+}
+
+.batchButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.batchButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.batchButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .exportButton {
@@ -232,12 +255,24 @@
   padding: 0.4rem 0.8rem;
 }
 
-.dangerButton {
+.buttonDanger {
   background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.dangerButton:hover {
+.buttonDanger:hover {
   background-color: #bb2d3b;
+}
+
+.dangerButton {
+  background-color: #dc3545;
 }
 
 .electionsGrid {
@@ -688,6 +723,22 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #666;
+}
+
+/* Gas Estimation Styles */
+.gasEstimation {
+  margin-top: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+}
+
+.gasEstimation p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-size: 0.9rem;
 }
 
 .success {

@@ -93,16 +93,38 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.candidateCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.candidateCardSelected {
+  background-color: #e6f7e6;
+  border-color: #4caf50;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
 }
 
 .candidateInfo {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .candidateInfo h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+}
+
+.resultsCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .progressBar {
@@ -141,52 +163,97 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   border: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.formGroup {
-  margin-bottom: 1rem;
-}
-
-.formGroup label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.formGroup select, .formGroup input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
+.votingSection h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
   background-color: #0070f3;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button:hover {
-  background-color: #0051a8;
+  background-color: #0060df;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.25);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.25);
 }
 
 .button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
+/* Enhance danger button (End Election) */
 .dangerButton {
   background-color: #dc3545;
 }
 
 .dangerButton:hover {
-  background-color: #bb2d3b;
+  background-color: #c82333;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.25);
+}
+
+.dangerButton:active {
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.25);
+}
+
+/* Further enhance the vote button */
+.voteButton {
+  margin-top: 1.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.voteButton:hover {
+  background-color: #3d8b40;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+}
+
+.voteButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.25);
+}
+
+.voteButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .badge {

@@ -168,6 +168,10 @@ return (
                       <span>Candidates: {election.candidatesCount}</span>
                       <span>Votes: {election.totalVotes}</span>
                     </div>
+                    <div className={styles.electionDates}>
+                      <span>Start: {formatDate(election.startTime) || 'Manual start'}</span>
+                      <span>End: {formatDate(election.endTime) || 'Manual end'}</span>
+                    </div>
                   </div>
                 </Link>
               ))}
