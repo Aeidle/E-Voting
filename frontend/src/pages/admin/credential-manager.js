@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { QRCodeSVG } from 'qrcode.react';
-import { QRCodeSVG } from 'qrcode.react';
+// import { QRCodeSVG } from 'qrcode.react';
 import styles from '../../styles/Admin.module.css';
 import ConnectWallet from '../../components/ConnectWallet';
 import initCredentialManager, {
@@ -39,14 +39,14 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
   const [selectedCredentials, setSelectedCredentials] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   
-  // Wallet info modal state
-  const [selectedWalletInfo, setSelectedWalletInfo] = useState({
-    isOpen: false,
-    address: '',
-    balance: '',
-    status: false,
-    createdAt: null
-  });
+  // // Wallet info modal state
+  // const [selectedWalletInfo, setSelectedWalletInfo] = useState({
+  //   isOpen: false,
+  //   address: '',
+  //   balance: '',
+  //   status: false,
+  //   createdAt: null
+  // });
   
   // Wallet info modal state
   const [selectedWalletInfo, setSelectedWalletInfo] = useState({
@@ -1049,13 +1049,6 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
                           onChange={() => handleSelectCredential(credential.walletAddress)}
                           className={styles.checkbox}
                         />
-                      </td>
-                      <td 
-                        className={`${styles.walletAddress} ${styles.clickable}`} 
-                        onClick={() => handleOpenWalletInfo(credential)}
-                        title="Click for wallet details"
-                      >
-                        {credential.walletAddress}
                       </td>
                       <td 
                         className={`${styles.walletAddress} ${styles.clickable}`} 
