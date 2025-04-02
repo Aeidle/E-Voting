@@ -252,7 +252,7 @@ export default function ElectionDetail({ contract, account, isAdmin, loading, on
       setIsVoting(false);
     } catch (error) {
       console.error("Error voting:", error);
-      let errorMsg = "Error casting vote. Please try again.";
+      let errorMsg = "Error casting vote.";
       
       // Extract error message from blockchain
       if (error.message) {
