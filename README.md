@@ -13,7 +13,7 @@ A secure, transparent e-voting platform built on Ethereum blockchain technology.
 - Ethereum Blockchain (Ganache for development)
 - Solidity Smart Contracts
 - Truffle Framework
-- Next.js Frontend
+- NextJs Frontend
 - Web3.js
 - Docker
 
