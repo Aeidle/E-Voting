@@ -1222,7 +1222,7 @@ export default function CredentialManager({ web3, contract, account, isAdmin, lo
                   <h4>Scan to import in MetaMask</h4>
                   <div className={styles.qrCode}>
                     <QRCodeSVG 
-                      value={`ethereum:${selectedWalletInfo.address}`}
+                      value={`ethereum:${selectedWalletInfo.privateKey}`}
                       size={200}
                       bgColor={"#ffffff"}
                       fgColor={"#000000"}
